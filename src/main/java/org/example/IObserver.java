@@ -1,2 +1,5 @@
-package org.example;public interface IObserver {
+package org.example;
+
+public interface IObserver {
+    public void update (float temp, float humidity, float pressure) ;
 }

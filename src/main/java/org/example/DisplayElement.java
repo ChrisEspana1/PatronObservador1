@@ -1,2 +1,5 @@
-package org.example;public interface DisplayElement {
+package org.example;
+
+public interface DisplayElement {
+    public void Display();
 }

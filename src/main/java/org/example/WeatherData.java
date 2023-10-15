@@ -2,44 +2,45 @@ package org.example;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observer;
 
-public class WheatherData implements ISubject{
-    private List<IObserver> observes;
-    public float temp,humidity,pressure;
-    public WheatherData(){
-    observes = new ArrayList<IObserver>();
+public class WeatherData implements ISubject{
+    private List<IObserver> observers;
+    private float temperature;
+    private float humidity;
+    private float pressure;
+
+    public WeatherData() {
+        observers = new ArrayList<IObserver>();
     }
-    @Override
+
     public void registerObserver(IObserver o) {
-    observes.add(o);
+        observers.add(o);
     }
 
-    @Override
     public void removeObserver(IObserver o) {
-    int i = observes.indexOf(o);
-    if(i>=0){
-        observes.remove(o);
-    }else{
-        System.out.println("no se encontro el indice indicado");
+        observers.remove(o);
     }
-    }
-    @Override
+
     public void notifyObservers() {
-    for(IObserver o:observes)
-        o.update(temp,humidity,pressure);
-}
-public void measurementsChanged(){
-        //acciones
-    notifyObservers();
-}
-    public void setMesurements( float temp, float humidity,float pressure){
-        this.temp = temp;
-        this.humidity=humidity;
+        for (IObserver observer : observers) {
+            observer.update(temperature, humidity, pressure);
+        }
+    }
+
+    public void measurementsChanged() {
+        notifyObservers();
+    }
+
+    public void setMeasurements(float temperature, float humidity, float pressure) {
+        this.temperature = temperature;
+        this.humidity = humidity;
         this.pressure = pressure;
         measurementsChanged();
     }
-    public float getTemp() {
-        return temp;
+
+    public float getTemperature() {
+        return temperature;
     }
 
     public float getHumidity() {
@@ -49,4 +50,6 @@ public void measurementsChanged(){
     public float getPressure() {
         return pressure;
     }
+
 }
+
